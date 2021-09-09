@@ -7,7 +7,7 @@ export function handleKeyboard(funcs = {
     s: () => { },
 }) {
     document.addEventListener("keydown", function (event) {
-        var key = event.key || event.keyCode;
+        var key = event.code || event.keyCode;
         switch (key) {
             case 'Space':
             case 32:
