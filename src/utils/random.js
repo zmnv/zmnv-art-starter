@@ -1,4 +1,5 @@
 /**
+ * https://github.com/mattdesl/tiny-artblocks/blob/main/src/util/random.js
  * A set of random utilities.
  *
  * The randomizer is built in two parts:
