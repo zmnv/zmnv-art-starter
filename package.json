@@ -13,6 +13,7 @@
     "esbuild": "^0.12.25",
     "fs-extra": "^10.0.0",
     "html-minifier-terser": "^6.0.2",
+    "live-server": "^1.2.1",
     "terser": "^5.7.2"
   }
 }
