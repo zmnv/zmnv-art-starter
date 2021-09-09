@@ -15,7 +15,7 @@ function build() {
     write: false,
     outdir: "./dist",
     // outfile: `./dist/${jsFileName}`,
-    target: ["chrome58", "firefox57", "safari11", "edge16"],
+    target: ["es2020"],
   });
 
   return bundle;
