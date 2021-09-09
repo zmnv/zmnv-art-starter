@@ -18,7 +18,11 @@ export function setUrlParam(paramKey, data) {
     window.history.pushState(undefined, "", newUrl);
 }
 
-export function RouterInstance() {
+export function RouterInstance({
+    isReloadable = false,
+    seed = null,
+    size = null,
+}) {
     
     let state = {
         seedFromURL: urlParams.get(URL_PARAMS.SEED),
@@ -27,16 +31,18 @@ export function RouterInstance() {
         isAnimated: urlParams.get(URL_PARAMS.ANIMATED) === "1",
     };
 
-    window.onpopstate = function (event) {
-        location.reload();
-    };
+    if (isReloadable) {
+        window.onpopstate = function (event) {
+            location.reload();
+        };
+    }
 
-    if (!urlParams.get(URL_PARAMS.SIZE)) {
+    if (!urlParams.get(URL_PARAMS.SIZE) && size) {
         setUrlParam(URL_PARAMS.SIZE, state.resolutionQuality);
     }
 
-    if (!urlParams.get(URL_PARAMS.SEED)) {
-        setUrlParam(URL_PARAMS.SEED, '123');
+    if (!urlParams.get(URL_PARAMS.SEED) && !!seed) {
+        setUrlParam(URL_PARAMS.SEED, seed);
     }
 
     return ({
@@ -44,6 +50,5 @@ export function RouterInstance() {
             state = {...state, ...newState}
         },
         getState: () => state,
-        setUrlParam,
     })
 }
