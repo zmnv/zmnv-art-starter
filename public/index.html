@@ -7,33 +7,46 @@
     <!-- Primary Meta Tags -->
     <title>%%_META_title_%%</title>
     <meta name="title" content="%%_META_title_%%" />
-    <meta
-      name="description"
-      content="%%_META_description_%%"
-    />
+    <meta name="description" content="%%_META_description_%%" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="%%_META_url_%%" />
     <meta property="og:title" content="%%_META_title_%%" />
-    <meta
-      property="og:description"
-      content="%%_META_description_%%"
-    />
+    <meta property="og:description" content="%%_META_description_%%" />
     <meta property="og:image" content="thumbnail.jpg" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta
-      property="twitter:url"
-      content="%%_META_url_%%"
-    />
+    <meta property="twitter:url" content="%%_META_url_%%" />
     <meta property="twitter:title" content="%%_META_title_%%" />
-    <meta
-      property="twitter:description"
-      content="%%_META_description_%%"
-    />
+    <meta property="twitter:description" content="%%_META_description_%%" />
     <meta property="twitter:image" content="thumbnail.jpg" />
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      * {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+      }
+
+      canvas {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
   </head>
   <body>
     %%_METACONSOLE_%%
