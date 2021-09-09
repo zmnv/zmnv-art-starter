@@ -84,7 +84,7 @@ function build() {
               path.resolve(__dirname, "./dist/index.html"),
             ],
             root: path.resolve(__dirname, "./dist"),
-            wait: 1000,
+            wait: 100,
             // ignore: path.resolve(__dirname, "../www/*.js"),
             middleware: [
               async (req, res, next) => {
