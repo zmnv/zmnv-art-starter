@@ -1,13 +1,14 @@
-var minifyJs = require("terser").minify;
-var minifyHtml = require('html-minifier-terser').minify;
-
 const path = require("path");
 const fs = require('fs-extra');
-const fsOrig = require('fs');
+const minifyJs = require("terser").minify;
+const minifyHtml = require('html-minifier-terser').minify;
 
 const __DEV__ = !!process.argv.includes("--dev");
 
-console.log('__dirname', __dirname);
+function replaceAll(str, find, replace) {
+  var escapedFind=find.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+  return str.replace(new RegExp(escapedFind, 'g'), replace);
+}
 
 function build() {
     const bundle = require('esbuild').buildSync({
@@ -29,13 +30,8 @@ function build() {
 
     fs.removeSync('./dist');
     fs.mkdirSync('./dist');
-    fs.copySync('./public', './dist', function (err) {
-        if (err) {
-            console.error(err);
-        } else {
-            console.log("success!");
-        }
-    });
+
+    fs.copySync(path.resolve(__dirname, "./public"), './dist');
 
     const bundle = build();
 
@@ -56,21 +52,28 @@ function build() {
 
 
     const html = fs.readFileSync("./public/index.html", "utf8");
-    const after = html.replace('%%_SRC_%%', jsFileName);
+    let htmlReady = html.replace('%%_SRC_%%', jsFileName);
+
+    const metadata = require('./public/metadata.json');
+    Object.keys(metadata).forEach((key) => {
+      const pattern = `%%_META_${key}_%%`;
+      const value = metadata[key];
+      htmlReady = replaceAll(htmlReady, `%%_META_${key}_%%`, value);
+    });
 
     if (!__DEV__) {
-        const htmlToMinify = after.replace('%%_LIVE_%%', '');
-        var resultHtml = await minifyHtml(htmlToMinify, {
+        const htmlToMinify = htmlReady.replace('%%_LIVE_%%', '');
+        htmlReady = await minifyHtml(htmlToMinify, {
             collapseWhitespace: true,
             minifyCSS: true,
             minifyJS: true,
         });
 
-        fs.writeFileSync("./dist/index.html", resultHtml, {encoding: 'utf8'});
+        fs.writeFileSync("./dist/index.html", htmlReady, {encoding: 'utf8'});
     }
 
     if (__DEV__) {
-        fs.writeFileSync("./dist/index.html", after, {encoding: 'utf8'});
+        fs.writeFileSync("./dist/index.html", htmlReady, {encoding: 'utf8'});
 
         const port = 3000;
 
