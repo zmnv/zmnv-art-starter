@@ -1,0 +1,1 @@
+(()=>{Math.pow(2,-32);var o=new Uint16Array(4);new DataView(o.buffer);var e=function(){let o="0x";for(let e=64;e>0;--e)o+="0123456789abcdef"[~~(16*Math.random())];return o}();console.log("B file",e),console.log("d",window.history)})();
