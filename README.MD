@@ -6,7 +6,7 @@
 
 Yes, this is one more starter, but it has:
 
-* handled state of seed for PRNG, so you always know how to graw the same picture again and share it with community.
+* handled state of seed for PRNG, so you always know how to draw the same picture again and share it with community.
 * metadata injects inside result HTML file automatically
 * SEO and console.log author's metadata
 * live reloading
