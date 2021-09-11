@@ -25,7 +25,7 @@ export function RouterInstance({
 }) {
     
     let state = {
-        seedFromURL: urlParams.get(URL_PARAMS.SEED),
+        seedFromURL: urlParams.get(URL_PARAMS.SEED) || seed,
         resolutionQuality: Number(urlParams.get(URL_PARAMS.SIZE)) || 1,
         isDownloadable: urlParams.get(URL_PARAMS.RENDER) === "1",
         isAnimated: urlParams.get(URL_PARAMS.ANIMATED) === "1",
